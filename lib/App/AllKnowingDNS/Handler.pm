@@ -11,9 +11,21 @@ use App::AllKnowingDNS::Zone;
 use POSIX qw(strftime);
 use v5.10;
 
-our @EXPORT = qw(reply_handler);
+=head1 NAME
 
-our $VERSION = '1.0';
+App::AllKnowingDNS::Handler - main code of AllKnowingDNS
+
+=head1 DESCRIPTION
+
+Note: User documentation is in all-knowing-dns(1).
+
+This module contains the C<Net::DNS::Nameserver> handler function.
+
+=head1 FUNCTIONS
+
+=cut
+
+our @EXPORT = qw(reply_handler);
 
 sub handle_ptr_query {
     my ($querylog, $zone, $qname, $qclass, $qtype) = @_;
@@ -32,6 +44,12 @@ sub handle_ptr_query {
         if (defined($result) && $result->header->rcode eq 'NOERROR') {
             if ($querylog) {
                 say strftime('%x %X %z', localtime) . " - Relaying upstream answer for $qname";
+            }
+            my @answer = $result->answer;
+            for my $answer (@answer) {
+                my $name = $answer->name;
+                $name =~ s/\.upstream$//;
+                $answer->name($name);
             }
             return ('NOERROR', [ $result->answer ], [], [], { aa => 1 });
         }
@@ -107,29 +125,9 @@ sub reply_handler {
 
 __END__
 
-=head1 NAME
-
-AllKnowingDNS - Tiny DNS server for IPv6 Reverse DNS
-
-=head1 DESCRIPTION
-
-AllKnowingDNS provides reverse DNS for IPv6 networks which use SLAAC
-(autoconf), e.g. for a /64 network.
-
-The problem with IPv6 reverse DNS and traditional nameservers is that the
-nameserver requires you to provide a zone file. Assuming you want to provide
-RDNS for a /64 network, you have 2**64 = 18446744073709551616 different usable
-IP addresses (a little less if you are using SLAAC). Providing a zone file for
-that, even in a very terse notation, would consume a huge amount of disk space
-and could not possibly be held in the memory of the computers we have nowadays.
-
-AllKnowingDNS instead generates PTR and AAAA records on the fly. You only
-configure which network you want to serve and what your entries should look
-like.
-
 =head1 VERSION
 
-Version 1.0
+Version 1.1
 
 =head1 AUTHOR
 
