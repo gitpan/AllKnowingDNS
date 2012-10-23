@@ -5,10 +5,10 @@ author:
 build_requires:
   ExtUtils::MakeMaker: 6.59
 configure_requires:
-  ExtUtils::MakeMaker: 6.59
+  ExtUtils::MakeMaker: 0
 distribution_type: module
-dynamic_config: 1
-generated_by: 'Module::Install version 1.06'
+dynamic_config: 0
+generated_by: 'ExtUtils::MakeMaker version 6.57_05'
 license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -16,15 +16,13 @@ meta-spec:
 name: AllKnowingDNS
 no_index:
   directory:
-    - inc
     - t
+    - inc
 requires:
   Mouse: 0
   MouseX::NativeTraits: 0
   Net::DNS: 0
   NetAddr::IP: 0
   Privileges::Drop: 0
-  perl: 5.10.0
-resources:
-  license: http://opensource.org/licenses/bsd-license.php
+  perl: 5.010
 version: 1.4
