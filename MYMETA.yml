@@ -25,4 +25,4 @@ requires:
   NetAddr::IP: 0
   Privileges::Drop: 0
   perl: 5.010
-version: 1.4
+version: 1.5
