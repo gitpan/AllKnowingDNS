@@ -3,12 +3,12 @@ abstract: ~
 author:
   - 'Michael Stapelberg, C<< <michael at stapelberg.de> >>'
 build_requires:
-  ExtUtils::MakeMaker: 6.76
+  ExtUtils::MakeMaker: 6.59
 configure_requires:
-  ExtUtils::MakeMaker: 6.76
+  ExtUtils::MakeMaker: 6.59
 distribution_type: module
 dynamic_config: 1
-generated_by: 'Module::Install version 1.04'
+generated_by: 'Module::Install version 1.06'
 license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -27,4 +27,4 @@ requires:
   perl: 5.10.0
 resources:
   license: http://opensource.org/licenses/bsd-license.php
-version: 1.6
+version: 1.7
